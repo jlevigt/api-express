@@ -4,12 +4,16 @@ class UserController {
     this.createUser = this.createUser.bind(this);
   }
 
-  async createUser(request, response) {
-    const postedUserData = request.body;
+  async createUser(request, response, next) {
+    try {
+      const postedData = request.body;
 
-    await this.userService.createUser(postedUserData);
+      await this.userService.createUser(postedData);
 
-    return response.sendStatus(201);
+      return response.sendStatus(201);
+    } catch (error) {
+      next(error);
+    }
   }
 }
 
