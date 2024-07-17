@@ -15,6 +15,17 @@ class LinkRepository {
 
     return;
   }
+
+  async updateLink(updateData) {
+    const query = {
+      text: "UPDATE links SET title=$1, url=$2 WHERE id=$3",
+      values: [updateData.title, updateData.url, updateData.id],
+    };
+
+    await pool.query(query);
+
+    return;
+  }
 }
 
 export default LinkRepository;

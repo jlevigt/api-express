@@ -11,5 +11,6 @@ const linkService = new LinkService(linkRepository);
 const linkController = new LinkController(linkService);
 
 linkRoutes.post("", linkController.createLink);
+linkRoutes.put("", linkController.updateLink);
 
 export default linkRoutes;
