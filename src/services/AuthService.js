@@ -3,7 +3,6 @@ import jwt from "jsonwebtoken";
 
 import BadRequestError from "../errors/BadRequestError.js";
 
-const chaveSecreta = "1";
 const EXPIRATION_IN_SECONDS = 60 * 60 * 24; // 1 dia
 
 const ERROR_MESSAGES = {
@@ -43,7 +42,7 @@ class AuthService {
       exp: Math.floor(Date.now() / 1000) + EXPIRATION_IN_SECONDS,
     };
 
-    return jwt.sign(payload, chaveSecreta);
+    return jwt.sign(payload, process.env.JWTKEY);
   }
 
   validateRequest(body) {
