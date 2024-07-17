@@ -9,7 +9,7 @@ function authMiddleware(request, res, next) {
       throw new UnauthorizedError("Token não enviado");
     }
 
-    jwt.verify(token, process.env.JWTKEY);
+    jwt.verify(token, process.env.JWT_KEY);
 
     next();
   } catch (error) {

@@ -1,6 +1,5 @@
 import express, { json } from "express";
-import dotenv from "dotenv";
-dotenv.config();
+import "dotenv/config";
 
 import swaggerUi from "swagger-ui-express";
 import swaggerDocument from "../swagger.json" assert { type: "json" };

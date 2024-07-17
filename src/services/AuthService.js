@@ -43,7 +43,7 @@ class AuthService {
       exp: Math.floor(Date.now() / 1000) + EXPIRATION_IN_SECONDS,
     };
 
-    return jwt.sign(payload, process.env.JWTKEY);
+    return jwt.sign(payload, process.env.JWT_KEY);
   }
 
   validateRequest(body) {
