@@ -2,9 +2,9 @@ import jwt from "jsonwebtoken";
 
 import UnauthorizedError from "../errors/UnauthorizedError.js";
 
-function authMiddleware(req, res, next) {
+function authMiddleware(request, res, next) {
   try {
-    const token = req.headers.token;
+    const token = request.headers.token;
     if (!token) {
       throw new UnauthorizedError("Token não enviado");
     }
