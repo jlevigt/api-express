@@ -1,4 +1,7 @@
+import jwt from "jsonwebtoken";
+const { JsonWebTokenError } = jwt;
 import BadRequestError from "../errors/BadRequestError.js";
+import UnauthorizedError from "../errors/UnauthorizedError.js";
 
 function errorMiddleware(err, request, response, next) {
   console.error(err);
@@ -21,7 +24,7 @@ function errorMiddleware(err, request, response, next) {
 }
 
 function recognizeError(error) {
-  if (error instanceof BadRequestError) {
+  if (error instanceof BadRequestError || error instanceof UnauthorizedError || error instanceof JsonWebTokenError) {
     return true;
   }
 

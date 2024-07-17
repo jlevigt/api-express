@@ -11,5 +11,5 @@ CREATE TABLE IF NOT EXISTS links (
     owner_id INTEGER REFERENCES users(id),
     title VARCHAR(100),
     url VARCHAR(255),
-    status VARCHAR(30)
+    status VARCHAR(30) DEFAULT 'active'
 );

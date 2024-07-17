@@ -5,10 +5,10 @@ class LinkRepository {
     this.createLink = this.createLink.bind(this);
   }
 
-  async createLink(postedData) {
+  async createLink(postData) {
     const query = {
       text: "INSERT INTO LINKS (owner_id, title, url) VALUES ($1, $2, $3)",
-      values: [postedData.owner_id, postedData.title, postedData.url],
+      values: [postData.owner_id, postData.title, postData.url],
     };
 
     await pool.query(query);
@@ -18,8 +18,8 @@ class LinkRepository {
 
   async updateLink(updateData) {
     const query = {
-      text: "UPDATE links SET title=$1, url=$2 WHERE id=$3",
-      values: [updateData.title, updateData.url, updateData.id],
+      text: "UPDATE links SET title=$1, url=$2, status=$3 WHERE id=$4",
+      values: [updateData.title, updateData.url, updateData.status, updateData.id],
     };
 
     await pool.query(query);

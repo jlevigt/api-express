@@ -18,17 +18,18 @@ class AuthService {
 
   async authenticate(loginData) {
     this.validateRequest(loginData);
+
     const storedUser = await this.userRepository.findUserByEmail(loginData.email);
     if (!storedUser) {
       throw new BadRequestError(ERROR_MESSAGES.USER_NOT_FOUND);
     }
 
     const isPasswordValid = await this.verifyPassword(loginData.password, storedUser.password);
-    if (isPasswordValid) {
-      return this.generateToken(storedUser);
-    } else {
+    if (!isPasswordValid) {
       throw new BadRequestError(ERROR_MESSAGES.INVALID_PASSWORD);
     }
+
+    return this.generateToken(storedUser);
   }
 
   async verifyPassword(password, storedPassword) {
@@ -37,8 +38,8 @@ class AuthService {
 
   generateToken(user) {
     const payload = {
+      id: user.id,
       email: user.email,
-      roles: user.roles,
       exp: Math.floor(Date.now() / 1000) + EXPIRATION_IN_SECONDS,
     };
 
