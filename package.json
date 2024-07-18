@@ -16,6 +16,8 @@
   },
   "scripts": {
     "dev": "nodemon src/index.js",
+    "services:up": "docker compose up -d",
+    "services:down": "docker compose down",
     "test": "vitest",
     "migration:create": "node-pg-migrate -m ./migrations create",
     "migration:up": "node-pg-migrate -m ./migrations --envPath .env up"
