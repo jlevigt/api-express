@@ -2,7 +2,7 @@ import bcrypt from "bcryptjs";
 
 import BadRequestError from "../errors/BadRequestError.js";
 
-const COST = 1; // saltRounds: expoente que elevará a base 2. O resultado é o número de vezes que o algoritmo de hash será executado.
+const cost = 1;
 
 class UserService {
   constructor(userRepository) {
@@ -10,26 +10,38 @@ class UserService {
     this.createUser = this.createUser.bind(this);
   }
 
-  async createUser(postedData) {
-    if (!postedData.name || !postedData.email || !postedData.username || !postedData.password) {
+  async createUser(postData) {
+    if (
+      !postData.name ||
+      !postData.username ||
+      !postData.email ||
+      !postData.password
+    ) {
       throw new BadRequestError("BadRequest blank");
     }
-    // unique email
-    const invalidEmail = await this.userRepository.findUserByEmail(postedData.email);
-    if (invalidEmail) {
-      throw new BadRequestError("BadRequest email");
-    }
-    // unique username
-    const invalidUsername = await this.userRepository.findUserByUsername(postedData.username);
-    if (invalidUsername) {
-      throw new BadRequestError("BadRequest username");
-    }
-    // hash password
-    postedData.password = await bcrypt.hash(postedData.password, COST); // O salt será gerado junto a função
 
-    await this.userRepository.insertUser(postedData);
+    await this.checkUniqueUsername(postData.username);
+    await this.checkUniqueEmail(postData.email);
+
+    postData.password = await bcrypt.hash(postData.password, cost);
+
+    await this.userRepository.insertUser(postData);
 
     return;
+  }
+
+  async checkUniqueUsername(username) {
+    const storedUser = await this.userRepository.findUserByUsername(username);
+    if (storedUser) {
+      throw new BadRequestError("BadRequest username");
+    }
+  }
+
+  async checkUniqueEmail(email) {
+    const storedUser = await this.userRepository.findUserByEmail(email);
+    if (storedUser) {
+      throw new BadRequestError("BadRequest email");
+    }
   }
 }
 

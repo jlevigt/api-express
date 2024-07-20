@@ -9,10 +9,14 @@ class LinkController {
 
   async createLink(request, response, next) {
     try {
-      const postData = request.body;
+      const token = jwt.decode(request.headers.token);
+      const user_id = token.user_id;
 
-      const { id } = jwt.decode(request.headers.token);
-      postData.owner_id = id;
+      const postData = {
+        user_id: user_id,
+        title: request.body.title,
+        url: request.body.url,
+      };
 
       await this.linkService.createLink(postData);
 
@@ -24,10 +28,16 @@ class LinkController {
 
   async updateLink(request, response, next) {
     try {
-      const updateData = request.body;
-      const link_id = request.query.id;
+      // passar por autorização
 
-      updateData.id = link_id;
+      const id = request.param.id;
+
+      const updateData = {
+        id: id,
+        title: request.body.title,
+        url: request.body.url,
+        public: request.body.public,
+      };
 
       await this.linkService.updateLink(updateData);
 

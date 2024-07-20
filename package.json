@@ -10,20 +10,24 @@
     "dotenv": "^16.4.5",
     "dotenv-expand": "^11.0.6",
     "nodemon": "^3.1.4",
-    "supertest": "^7.0.0",
+    "prettier": "^3.3.3",
     "swagger-ui-express": "^5.0.1",
     "vitest": "^2.0.3"
   },
   "scripts": {
-    "dev": "nodemon src/index.js",
+    "dev": "npm run services:up && npm run wait-for-postgres && npm run migration:up && nodemon ./src/app.js",
     "services:up": "docker compose up -d",
+    "services:stop": "docker compose stop",
     "services:down": "docker compose down",
-    "test": "vitest",
     "migration:create": "node-pg-migrate -m ./migrations create",
-    "migration:up": "node-pg-migrate -m ./migrations --envPath .env up"
+    "migration:up": "node-pg-migrate -m ./migrations --envPath .env up",
+    "wait-for-postgres": "node ./scripts/wait-for-postgres.cjs",
+    "test": "vitest",
+    "lint:prettier:check": "prettier --check .",
+    "lint:prettier:fix": "prettier --write ."
   },
   "type": "module",
-  "main": "/src/index.js",
+  "main": "/src/app.js",
   "name": "trabalho-final",
   "version": "1.0.0"
 }

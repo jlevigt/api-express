@@ -6,9 +6,14 @@ class UserController {
 
   async createUser(request, response, next) {
     try {
-      const postedData = request.body;
+      const postData = {
+        name: request.body.name,
+        username: request.body.username,
+        email: request.body.email,
+        password: request.body.password,
+      };
 
-      await this.userService.createUser(postedData);
+      await this.userService.createUser(postData);
 
       return response.sendStatus(201);
     } catch (error) {

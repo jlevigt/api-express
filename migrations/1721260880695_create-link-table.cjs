@@ -1,7 +1,7 @@
 exports.up = (pgm) => {
   pgm.createTable("links", {
     id: "id",
-    owner_id: {
+    user_id: {
       type: "integer",
       notNull: true,
       references: '"users"',
@@ -15,10 +15,10 @@ exports.up = (pgm) => {
       type: "varchar(255)",
       notNull: true,
     },
-    status: {
-      type: "varchar(30)",
+    public: {
+      type: "boolean",
       notNull: true,
-      default: "active",
+      default: false,
     },
   });
 };

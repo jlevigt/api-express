@@ -19,12 +19,17 @@ class AuthService {
   async authenticate(loginData) {
     this.validateRequest(loginData);
 
-    const storedUser = await this.userRepository.findUserByEmail(loginData.email);
+    const storedUser = await this.userRepository.findUserByEmail(
+      loginData.email,
+    );
     if (!storedUser) {
       throw new BadRequestError(ERROR_MESSAGES.USER_NOT_FOUND);
     }
 
-    const isPasswordValid = await this.verifyPassword(loginData.password, storedUser.password);
+    const isPasswordValid = await this.verifyPassword(
+      loginData.password,
+      storedUser.password,
+    );
     if (!isPasswordValid) {
       throw new BadRequestError(ERROR_MESSAGES.INVALID_PASSWORD);
     }

@@ -24,7 +24,11 @@ function errorMiddleware(err, request, response, next) {
 }
 
 function recognizeError(error) {
-  if (error instanceof BadRequestError || error instanceof UnauthorizedError || error instanceof JsonWebTokenError) {
+  if (
+    error instanceof BadRequestError ||
+    error instanceof UnauthorizedError ||
+    error instanceof JsonWebTokenError
+  ) {
     return true;
   }
 

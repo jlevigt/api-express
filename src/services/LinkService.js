@@ -6,11 +6,17 @@ class LinkService {
   }
 
   async createLink(postedData) {
+    // validar
+    // título e link não pode ser vazio
+
     await this.linkRepository.createLink(postedData);
     return;
   }
 
   async updateLink(updateData) {
+    // validar
+    // título e link não pode ser vazio
+
     await this.linkRepository.updateLink(updateData);
     return;
   }

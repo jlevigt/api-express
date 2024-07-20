@@ -6,11 +6,6 @@ services:
     image: postgres:16-alpine3.19
     env_file:
       - ./.env
-    volumes:
-      - postgres_data:/data/postgres
     ports:
       - "5432:5432"
     restart: unless-stopped
-
-volumes:
-  postgres_data:
