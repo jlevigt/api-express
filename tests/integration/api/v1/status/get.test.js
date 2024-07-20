@@ -1,4 +1,5 @@
-import { describe, it } from "vitest";
+import "dotenv/config";
+import { describe, it, expect } from "vitest";
 
 describe("GET api/v1/status", () => {
   it("", async () => {

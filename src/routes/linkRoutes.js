@@ -10,6 +10,8 @@ const linkRepository = new LinkRepostitory();
 const linkService = new LinkService(linkRepository);
 const linkController = new LinkController(linkService);
 
+linkRoutes.get("", linkController.listLinks);
+linkRoutes.get("/:username", linkController.listLinks);
 linkRoutes.post("", linkController.createLink);
 linkRoutes.put("/:id", linkController.updateLink);
 

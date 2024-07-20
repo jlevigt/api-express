@@ -1,4 +1,5 @@
-import { describe, it } from "vitest";
+import "dotenv/config";
+import { describe, it, expect } from "vitest";
 
 describe("POST /api/v1/users", () => {
   it("With unique and valid data", async () => {
@@ -8,9 +9,10 @@ describe("POST /api/v1/users", () => {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        username: "uniqueUserName",
-        email: "validemailCAPS@gmail.com",
-        password: "validpassword",
+        name: "name",
+        username: "uniqueUsername",
+        email: "uniqueEmail",
+        password: "password",
       }),
     });
 

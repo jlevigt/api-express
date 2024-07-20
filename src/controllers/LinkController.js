@@ -5,6 +5,33 @@ class LinkController {
     this.linkService = linkService;
     this.createLink = this.createLink.bind(this);
     this.updateLink = this.updateLink.bind(this);
+    this.listLinks = this.listLinks.bind(this);
+    this.listLinksByUsername = this.listLinksByUsername.bind(this);
+  }
+
+  async listLinks(request, response, next) {
+    try {
+      const token = jwt.decode(request.headers.token);
+      const user_id = token.user_id;
+
+      await this.linkService.listLinks(user_id);
+
+      return response.sendStatus(200);
+    } catch (error) {
+      next(error);
+    }
+  }
+
+  async listLinksByUsername(request, response, next) {
+    try {
+      const username = request.param.username;
+
+      await this.linkService.listLinksByUsername(username);
+
+      return response.sendStatus(200);
+    } catch (error) {
+      next(error);
+    }
   }
 
   async createLink(request, response, next) {

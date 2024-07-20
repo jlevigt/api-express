@@ -5,6 +5,33 @@ class LinkRepository {
     this.createLink = this.createLink.bind(this);
   }
 
+  async listLinks(user_id) {
+    const query = {
+      text: "SELECT * FROM links WHERE user_id=$1",
+      values: [user_id],
+    };
+
+    const result = await pool.query(query);
+
+    return result.rows;
+  }
+
+  async listLinksByUsername(username) {
+    const query = {
+      text: `
+        SELECT links.* 
+        FROM links
+        JOIN users ON users.id = links.user_id
+        WHERE users.username = $1
+      `,
+      values: [username],
+    };
+
+    const result = await pool.query(query);
+
+    return result.rows;
+  }
+
   async createLink(postData) {
     const query = {
       text: "INSERT INTO LINKS (user_id, title, url) VALUES ($1, $2, $3)",
