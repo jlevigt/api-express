@@ -3,20 +3,20 @@ import jwt from "jsonwebtoken";
 class LinkController {
   constructor(linkService) {
     this.linkService = linkService;
-    this.createLink = this.createLink.bind(this);
-    this.updateLink = this.updateLink.bind(this);
     this.listLinks = this.listLinks.bind(this);
     this.listLinksByUsername = this.listLinksByUsername.bind(this);
+    this.createLink = this.createLink.bind(this);
+    this.updateLink = this.updateLink.bind(this);
   }
 
   async listLinks(request, response, next) {
     try {
       const token = jwt.decode(request.headers.token);
-      const user_id = token.user_id;
+      const user_id = token.id;
 
-      await this.linkService.listLinks(user_id);
+      const list = await this.linkService.listLinks(user_id);
 
-      return response.sendStatus(200);
+      return response.status(200).json(list);
     } catch (error) {
       next(error);
     }
@@ -24,11 +24,11 @@ class LinkController {
 
   async listLinksByUsername(request, response, next) {
     try {
-      const username = request.param.username;
+      const username = request.params.username;
 
-      await this.linkService.listLinksByUsername(username);
+      const list = await this.linkService.listLinksByUsername(username);
 
-      return response.sendStatus(200);
+      return response.status(200).json(list);
     } catch (error) {
       next(error);
     }
@@ -37,7 +37,7 @@ class LinkController {
   async createLink(request, response, next) {
     try {
       const token = jwt.decode(request.headers.token);
-      const user_id = token.user_id;
+      const user_id = token.id;
 
       const postData = {
         user_id: user_id,
@@ -57,7 +57,7 @@ class LinkController {
     try {
       // passar por autorização
 
-      const id = request.param.id;
+      const id = request.params.id;
 
       const updateData = {
         id: id,

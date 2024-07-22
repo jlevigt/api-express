@@ -1,5 +1,6 @@
 import "dotenv/config";
 import express, { json } from "express";
+import cors from "cors";
 
 import swaggerUi from "swagger-ui-express";
 import swaggerDocument from "../swagger.json" assert { type: "json" };
@@ -16,9 +17,10 @@ import authMiddleware from "./middlewares/authMiddlware.js";
 const PORT = 8080;
 
 const app = express();
-app.use(json());
-
+// Configuração CORS permissiva
+app.use(cors());
 app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocument));
+app.use(json());
 
 app.get("/api/v1/status", status);
 

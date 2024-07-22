@@ -1,20 +1,21 @@
 class LinkService {
   constructor(linkRepository) {
     this.linkRepository = linkRepository;
-    this.createLink = this.createLink.bind(this);
-    this.updateLink = this.updateLink.bind(this);
     this.listLinks = this.listLinks.bind(this);
     this.listLinksByUsername = this.listLinksByUsername.bind(this);
+    this.createLink = this.createLink.bind(this);
+    this.updateLink = this.updateLink.bind(this);
   }
 
   async listLinks(user_id) {
-    const linkList = await this.linkService.listLinks(user_id);
+    const linkList = await this.linkRepository.listLinks(user_id);
 
     return linkList;
   }
 
   async listLinksByUsername(username) {
-    const linkList = await this.linkService.listLinksByUsername(username);
+    const linkList = await this.linkRepository.listLinksByUsername(username);
+    console.log(linkList);
 
     return linkList;
   }

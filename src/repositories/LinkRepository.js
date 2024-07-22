@@ -2,6 +2,8 @@ import pool from "../config/database.js";
 
 class LinkRepository {
   constructor() {
+    this.listLinks = this.listLinks.bind(this);
+    this.listLinksByUsername = this.listLinksByUsername.bind(this);
     this.createLink = this.createLink.bind(this);
   }
 
