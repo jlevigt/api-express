@@ -10,6 +10,6 @@ const userRepository = new UserRepository();
 const authService = new AuthService(userRepository);
 const authController = new AuthController(authService);
 
-authRoutes.post("/login", authController.authenticate);
+authRoutes.post("/", authController.authenticate);
 
 export default authRoutes;

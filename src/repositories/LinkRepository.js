@@ -60,6 +60,17 @@ class LinkRepository {
 
     return;
   }
+
+  async deleteLink(id) {
+    const query = {
+      text: "DELETE FROM links WHERE id=$1",
+      values: [id],
+    };
+
+    await pool.query(query);
+
+    return;
+  }
 }
 
 export default LinkRepository;

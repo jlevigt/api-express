@@ -73,6 +73,18 @@ class LinkController {
       next(error);
     }
   }
+
+  async deleteLink(request, response, next) {
+    try {
+      const id = request.params.id;
+
+      await this.linkService.deleteLink(id);
+
+      return response.sendStatus(204);
+    } catch (error) {
+      next(error);
+    }
+  }
 }
 
 export default LinkController;

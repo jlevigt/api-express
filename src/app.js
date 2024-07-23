@@ -17,9 +17,10 @@ import authMiddleware from "./middlewares/authMiddlware.js";
 const PORT = 8080;
 
 const app = express();
-// Configuração CORS permissiva
+
 app.use(cors());
 app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocument));
+
 app.use(json());
 
 app.get("/api/v1/status", status);

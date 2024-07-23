@@ -14,5 +14,6 @@ linkRoutes.get("", linkController.listLinks);
 linkRoutes.get("/:username", linkController.listLinksByUsername);
 linkRoutes.post("", linkController.createLink);
 linkRoutes.put("/:id", linkController.updateLink);
+linkRoutes.delete("/:id", linkController.deleteLink);
 
 export default linkRoutes;

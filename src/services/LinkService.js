@@ -35,6 +35,14 @@ class LinkService {
     await this.linkRepository.updateLink(updateData);
     return;
   }
+
+  async deleteLink(request, response, next) {
+    const id = request.params.id;
+
+    await this.linkService.deleteLink(id);
+
+    return response.sendStatus(204);
+  }
 }
 
 export default LinkService;
