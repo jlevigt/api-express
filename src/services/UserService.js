@@ -11,12 +11,7 @@ class UserService {
   }
 
   async createUser(postData) {
-    if (
-      !postData.name ||
-      !postData.username ||
-      !postData.email ||
-      !postData.password
-    ) {
+    if (!postData.username || !postData.email || !postData.password) {
       throw new BadRequestError("BadRequest blank");
     }
 

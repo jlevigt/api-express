@@ -25,13 +25,8 @@ class UserRepository {
 
   async insertUser(postData) {
     const query = {
-      text: "INSERT INTO users (name, username, email, password) VALUES ($1, $2, $3, $4)",
-      values: [
-        postData.name,
-        postData.username,
-        postData.email,
-        postData.password,
-      ],
+      text: "INSERT INTO users (username, email, password) VALUES ($1, $2, $3)",
+      values: [postData.username, postData.email, postData.password],
     };
 
     await pool.query(query);

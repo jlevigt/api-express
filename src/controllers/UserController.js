@@ -7,7 +7,6 @@ class UserController {
   async createUser(request, response, next) {
     try {
       const postData = {
-        name: request.body.name,
         username: request.body.username,
         email: request.body.email,
         password: request.body.password,
