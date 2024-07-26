@@ -12,7 +12,6 @@ import userRoutes from "./routes/userRoutes.js";
 import linkRoutes from "./routes/linkRoutes.js";
 
 import errorMiddleware from "./middlewares/errorHandlerMiddleware.js";
-import authMiddleware from "./middlewares/authMiddlware.js";
 
 const PORT = 8080;
 
@@ -27,7 +26,7 @@ app.get("/api/v1/status", status);
 
 app.use("/api/v1/auth", authRoutes);
 app.use("/api/v1/users", userRoutes);
-app.use("/api/v1/links", authMiddleware, linkRoutes);
+app.use("/api/v1/links", linkRoutes);
 
 app.use(errorMiddleware);
 

@@ -20,5 +20,10 @@ exports.up = (pgm) => {
       notNull: true,
       default: false,
     },
+    archived: {
+      type: "boolean",
+      notNull: true,
+      default: false,
+    },
   });
 };

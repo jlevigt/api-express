@@ -36,8 +36,8 @@ class LinkRepository {
 
   async createLink(postData) {
     const query = {
-      text: "INSERT INTO LINKS (user_id, title, url) VALUES ($1, $2, $3)",
-      values: [postData.user_id, postData.title, postData.url],
+      text: "INSERT INTO LINKS (user_id, title, url, public) VALUES ($1, $2, $3, $4)",
+      values: [postData.user_id, postData.title, postData.url, postData.public],
     };
 
     await pool.query(query);

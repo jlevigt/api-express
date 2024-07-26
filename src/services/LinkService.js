@@ -15,7 +15,6 @@ class LinkService {
 
   async listLinksByUsername(username) {
     const linkList = await this.linkRepository.listLinksByUsername(username);
-    console.log(linkList);
 
     return linkList;
   }

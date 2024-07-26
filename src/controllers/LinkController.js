@@ -43,6 +43,7 @@ class LinkController {
         user_id: user_id,
         title: request.body.title,
         url: request.body.url,
+        public: request.body.public,
       };
 
       await this.linkService.createLink(postData);
