@@ -5,6 +5,8 @@ class LinkRepository {
     this.listLinks = this.listLinks.bind(this);
     this.listLinksByUsername = this.listLinksByUsername.bind(this);
     this.createLink = this.createLink.bind(this);
+    this.updateLink = this.updateLink.bind(this);
+    this.deleteLink = this.deleteLink.bind(this);
   }
 
   async listLinks(user_id) {
@@ -24,7 +26,7 @@ class LinkRepository {
         SELECT links.* 
         FROM links
         JOIN users ON users.id = links.user_id
-        WHERE users.username = $1
+        WHERE users.username = $1 AND links.public = true
       `,
       values: [username],
     };

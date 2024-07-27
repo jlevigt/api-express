@@ -5,6 +5,7 @@ class LinkService {
     this.listLinksByUsername = this.listLinksByUsername.bind(this);
     this.createLink = this.createLink.bind(this);
     this.updateLink = this.updateLink.bind(this);
+    this.deleteLink = this.deleteLink.bind(this);
   }
 
   async listLinks(user_id) {
@@ -35,12 +36,10 @@ class LinkService {
     return;
   }
 
-  async deleteLink(request, response, next) {
-    const id = request.params.id;
+  async deleteLink(id) {
+    await this.linkRepository.deleteLink(id);
 
-    await this.linkService.deleteLink(id);
-
-    return response.sendStatus(204);
+    return;
   }
 }
 

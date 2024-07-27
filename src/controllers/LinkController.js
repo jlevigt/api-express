@@ -7,6 +7,7 @@ class LinkController {
     this.listLinksByUsername = this.listLinksByUsername.bind(this);
     this.createLink = this.createLink.bind(this);
     this.updateLink = this.updateLink.bind(this);
+    this.deleteLink = this.deleteLink.bind(this);
   }
 
   async listLinks(request, response, next) {
@@ -37,6 +38,7 @@ class LinkController {
   async createLink(request, response, next) {
     try {
       const token = jwt.decode(request.headers.token);
+      console.log(token);
       const user_id = token.id;
 
       const postData = {
@@ -59,6 +61,7 @@ class LinkController {
       // passar por autorização
 
       const id = request.params.id;
+      console.log(id);
 
       const updateData = {
         id: id,
@@ -78,6 +81,7 @@ class LinkController {
   async deleteLink(request, response, next) {
     try {
       const id = request.params.id;
+      console.log(id);
 
       await this.linkService.deleteLink(id);
 
