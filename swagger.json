@@ -85,9 +85,9 @@
         }
       }
     },
-    "/api/v1/links": {
+    "/api/v1/patients": {
       "get": {
-        "summary": "Listar links do usuário do token",
+        "summary": "Listar patients do usuário do token",
         "security": [
           {
             "apiKeyAuth": []
@@ -95,12 +95,12 @@
         ],
         "responses": {
           "200": {
-            "description": "Lista de links"
+            "description": "Lista de patients"
           }
         }
       },
       "post": {
-        "summary": "Criar um novo link",
+        "summary": "Criar um novo patient",
         "security": [
           {
             "apiKeyAuth": []
@@ -113,14 +113,11 @@
               "schema": {
                 "type": "object",
                 "properties": {
-                  "title": {
+                  "name": {
                     "type": "string"
                   },
-                  "url": {
-                    "type": "string"
-                  },
-                  "public": {
-                    "type": "boolean"
+                  "age": {
+                    "type": "integer"
                   }
                 }
               }
@@ -129,12 +126,12 @@
         },
         "responses": {
           "201": {
-            "description": "Link criado com sucesso"
+            "description": "Patient criado com sucesso"
           }
         }
       },
       "put": {
-        "summary": "Atualizar um link existente",
+        "summary": "Atualizar um patient existente",
         "security": [
           {
             "apiKeyAuth": []
@@ -173,12 +170,12 @@
         },
         "responses": {
           "204": {
-            "description": "Link atualizado com sucesso"
+            "description": "Patient atualizado com sucesso"
           }
         }
       },
       "delete": {
-        "summary": "Deletar um link existente",
+        "summary": "Deletar um patient existente",
         "security": [
           {
             "apiKeyAuth": []
@@ -196,32 +193,7 @@
         ],
         "responses": {
           "204": {
-            "description": "Link deletado com sucesso"
-          }
-        }
-      }
-    },
-    "/api/v1/links/{username}": {
-      "get": {
-        "summary": "Listar links de um usuário específico",
-        "security": [
-          {
-            "apiKeyAuth": []
-          }
-        ],
-        "parameters": [
-          {
-            "in": "path",
-            "name": "username",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Lista de links do usuário"
+            "description": "Patient deletado com sucesso"
           }
         }
       }

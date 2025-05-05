@@ -10,13 +10,13 @@
   "devDependencies": {
     "dotenv": "^16.4.5",
     "dotenv-expand": "^11.0.6",
-    "nodemon": "^3.1.4",
+    "nodemon": "^3.1.10",
     "prettier": "^3.3.3",
     "swagger-ui-express": "^5.0.1",
     "vitest": "^2.0.3"
   },
   "scripts": {
-    "dev": "npm run services:up && npm run wait-for-postgres && npm run migration:up && nodemon ./src/app.js",
+    "dev": "npm run services:up && npm run wait-for-postgres && npm run migration:up && nodemon src/app.js",
     "services:up": "docker compose up -d",
     "services:stop": "docker compose stop",
     "services:down": "docker compose down",
